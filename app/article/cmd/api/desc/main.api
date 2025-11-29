@@ -1,0 +1,35 @@
+syntax = "v1"
+
+info (
+	title:  "文章服务"
+	desc:   "文章服务"
+	author: "softenTheGlare"
+	//    email: "type email here"
+	version: "v1"
+)
+
+import "article/article.api"
+
+//  服务相关配置
+@server (
+	prefix: "/article"
+	group:  "article"
+)
+service article {
+	@doc "获得文章列表"
+	@handler getArticles
+	post /getArticles (GetArticleListReq) returns (GetArticleListResp)
+
+	@doc "创建文章"
+	@handler createArticle
+	post /createArticle (CreateArticleReq) returns (CreateArticleResp)
+
+	@doc "删除文章"
+	@handler deleteArticle
+	post /deleteArticle (DeleteArticleReq) returns (DeleteArticleResp)
+
+	@doc "更新文章"
+	@handler updateArticle
+	post /updateArticle (UpdateArticleReq) returns (UpdateArticleResp)
+}
+

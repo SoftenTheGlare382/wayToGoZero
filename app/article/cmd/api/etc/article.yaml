@@ -1,0 +1,17 @@
+Name: article-api #服务名称
+Host: 127.0.0.1 #监听地址
+Port: 1001 #监听端口
+Mode: dev #运行模式
+
+# 数据库配置
+DB:
+  DataSource: root:root@tcp(127.0.0.1:3306)/way_to_gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai #数据库连接字符串
+Cache:
+  - Host: 127.0.0.1:6379
+
+#配置rpc客户端
+ArticleRpcConf:
+  EndPoints:
+    - 127.0.0.1:2001
+  NonBlock: true
+

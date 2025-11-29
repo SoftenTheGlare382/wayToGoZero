@@ -1,0 +1,19 @@
+Name: article-rpc # 服务名称
+ListenOn: 127.0.0.1:2001 # 监听地址
+Mode: dev # 运行模式
+# redis 配置
+Redis:
+  Host: 127.0.0.1:6379
+  Type: node
+  Pass:
+  Key: article-rpc
+#sql 配置
+DB:
+  DataSource: root:root@tcp(127.0.0.1:3306)/way_to_gozero?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai #数据库连接字符串
+Cache:
+  - Host: 127.0.0.1:6379
+    Pass:
+#Etcd:
+#  Hosts:
+#  - 127.0.0.1:2379
+#  Key: article.rpc
