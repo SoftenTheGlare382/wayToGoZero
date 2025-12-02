@@ -1,0 +1,33 @@
+Name: bookstore-api
+Host: 0.0.0.0
+Port: 8888
+# 增加工作线程数
+WorkerCount: 8  # 根据CPU核心数调整
+# 增加超时设置
+Timeout: 3000
+
+RestConf:
+  Timeout: 3000
+  MaxConns: 1000      # 最大并发连接数
+  CpuThreshold: 900    # CPU 使用率阈值，默认 900 表示 90%
+
+Add:
+  Etcd:
+    Hosts:
+    - 127.0.0.1:2379
+    Key: add.rpc
+Check:
+  Etcd:
+    Hosts:
+    - 127.0.0.1:2379
+    Key: check.rpc
+  # RPC客户端连接池设置
+  ConnTimeout: 1000
+  CallTimeout: 2000
+  PoolSize: 100
+Log:
+  Level: error
+## 限流配置
+#Limit:
+#  QPS: 1000  # 每秒请求数限制
+#  Burst: 2000  # 突发流量允许值

@@ -1,0 +1,20 @@
+Name: check.rpc
+ListenOn: 0.0.0.0:8081
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: check.rpc
+DataSource: root:root@tcp(127.0.0.1:3306)/way_to_gozero
+# 数据库连接池配置
+MaxIdleConns: 50
+MaxOpenConns: 200
+ConnMaxLifetime: 600000  # 毫秒
+Table: book
+Cache:
+  - Host: 127.0.0.1:6379
+    DisableMaintenance: true
+    Type: node
+    TTL: 3600
+    MaxActive: 200
+Log:
+  Level: error
