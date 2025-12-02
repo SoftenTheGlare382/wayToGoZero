@@ -1,33 +1,35 @@
 Name: bookstore-api
 Host: 0.0.0.0
 Port: 8888
-# 增加工作线程数
-WorkerCount: 8  # 根据CPU核心数调整
-# 增加超时设置
-Timeout: 3000
+# 根据CPU核心数调整，通常设为CPU核心数的2-4倍
+WorkerCount: 32
+# 优化超时设置
+Timeout: 500
 
 RestConf:
-  Timeout: 3000
-  MaxConns: 1000      # 最大并发连接数
-  CpuThreshold: 900    # CPU 使用率阈值，默认 900 表示 90%
+  Timeout: 500
+  MaxConns: 100000     # 大幅增加最大并发连接数
+  CpuThreshold: 900
+  # 启用HTTP Keep-Alive
+  KeepAlive: true
+  # 设置连接复用相关参数
+  KeepAliveTimeout: 60000
 
 Add:
   Etcd:
     Hosts:
-    - 127.0.0.1:2379
+      - 127.0.0.1:2379
     Key: add.rpc
 Check:
   Etcd:
     Hosts:
-    - 127.0.0.1:2379
+      - 127.0.0.1:2379
     Key: check.rpc
-  # RPC客户端连接池设置
-  ConnTimeout: 1000
-  CallTimeout: 2000
-  PoolSize: 100
+  # 大幅提升RPC客户端连接池
+  ConnTimeout: 500
+  CallTimeout: 1000
+  PoolSize: 5000      # 增加RPC连接池大小
+  # 启用连接复用
+  KeepAlive: true
 Log:
-  Level: error
-## 限流配置
-#Limit:
-#  QPS: 1000  # 每秒请求数限制
-#  Burst: 2000  # 突发流量允许值
+  Level: error        # 保持错误级别日志，减少开销

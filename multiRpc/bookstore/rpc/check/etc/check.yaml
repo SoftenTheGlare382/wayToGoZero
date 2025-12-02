@@ -2,12 +2,12 @@ Name: check.rpc
 ListenOn: 0.0.0.0:8081
 Etcd:
   Hosts:
-  - 127.0.0.1:2379
+    - 127.0.0.1:2379
   Key: check.rpc
 DataSource: root:root@tcp(127.0.0.1:3306)/way_to_gozero
-# 数据库连接池配置
-MaxIdleConns: 50
-MaxOpenConns: 200
+# 大幅增加数据库连接池
+MaxIdleConns: 500
+MaxOpenConns: 5000
 ConnMaxLifetime: 600000  # 毫秒
 Table: book
 Cache:
@@ -15,6 +15,9 @@ Cache:
     DisableMaintenance: true
     Type: node
     TTL: 3600
-    MaxActive: 200
+    MaxActive: 10000      # 大幅增加缓存连接数
+    # 添加更多Redis优化参数
+    MinIdle: 1000
+    IdleTimeout: 60000
 Log:
   Level: error

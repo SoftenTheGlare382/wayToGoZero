@@ -53,3 +53,12 @@ goctl rpc protoc add.proto --go_out=../ --go-grpc_out=../ --zrpc_out=../ --style
 9. 连接数据库
 10. 完善rpc逻辑代码
 11. 测试rpc服务
+
+## Day 3
+高并发测试
+### 测试 bookstore 服务的高并发性能
+合理设置后，测试 bookstore 服务的高并发性能，观察服务的响应时间和吞吐量。
+设置并发线程数为5000，时间为120s, 测试 bookstore 服务的高并发性能
+
+结果：
+* qps:25000左右
